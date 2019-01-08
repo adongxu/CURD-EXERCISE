@@ -16,4 +16,7 @@ export default (app: Application) => {
 
   // 删除
   router.get('/home/delUser', controller.home.delUser)
+
+  // 修改
+  router.get('/home/updateUser', controller.home.updateUser)
 }

@@ -52,8 +52,23 @@ export default class Home extends Service {
     })
     // 存在用户就删除
     if (user) {
-      console.log(user)
       await userRepository.remove(user)
     }
   }
+
+  // 更新用户 修改对应名字用户的分数
+  public async updateUser(name: string, score: number) {
+    const { app } = this
+    const userRepository = app.typeorm.getRepository(UserInfoModel)
+    const user = await userRepository.findOne({
+      name
+    })
+    // 存在用户就更新
+    if (user) {
+      console.log(user)
+      user.score = score
+      await userRepository.save(user)
+    }
+  }
+
 }

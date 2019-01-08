@@ -80,4 +80,23 @@ export default class HomeController extends Controller {
       this.stderr(ctx, err)
     }
   }
+
+  // 更新用户
+  public async updateUser() {
+    const {ctx} = this
+    try {
+      const payload = this.getRequestPayload(ctx)
+      ctx.validate({
+        name: 'string',
+        score: 'string'
+      }, payload)
+      console.log(payload)
+      // const {name, score} = payload
+      // const { name, score } = payload
+      await this.service.home.updateUser(payload.name, payload.score)
+      this.stdout(ctx, 'Updated successfully')
+    } catch (err) {
+      this.stderr(ctx, err)
+    }
+  }
 }
